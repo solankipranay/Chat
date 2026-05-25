@@ -34,8 +34,13 @@ const App = () => {
     };
 
     try {
+      const apiUrl = import.meta.env.VITE_API_URL;
+      if (!apiUrl) {
+        throw new Error("API URL configuration (VITE_API_URL) is missing! Please configure it in your environment settings (Vercel Environment Variables).");
+      }
+
       // Use streaming generateContent endpoint
-      const streamUrl = import.meta.env.VITE_API_URL.replace(
+      const streamUrl = apiUrl.replace(
         "generateContent",
         "streamGenerateContent"
       );
